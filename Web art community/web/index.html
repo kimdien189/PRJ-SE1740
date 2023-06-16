@@ -1,24 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Bookshop Website</title>
+	<title>My Webpage</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-+9wG3zQYJ4Lvptv+4RqQlKvKULoyvVZz2tXWzGhjJcJdH9BfuBQHqoed6+8sL6M5F8l9Zc3pVgjzGnT7Y6YrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="../src/css/style.css" />
 </head>
 <body>
-    <div style="text-align: center">
-        <h1>Admin Login</h1>
-        <form action="login" method="post">
-            <label for="email">Email:</label>
-            <input name="email" size="30" />
-            <br><br>
-            <label for="password">Password:</label>
-            <input type="password" name="password" size="30" />
-            <br>${message}
-            <br><br>           
-            <button type="submit">Login</button>
-        </form>
-    </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Gallery Land</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Explore
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">For you</a></li>
+                  <li><a class="dropdown-item" href="#">Popular</a></li>
+                  <li><a class="dropdown-item" href="#">New</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">More...</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="input-group col-md-4">
+              <div class="container">
+                <div class="search-box">
+                  <div class="search-icon"><i class="fa fa-search search-icon"></i></div>
+                  <form action="" class="search-form">
+                    <input type="text" placeholder="Search" id="search" autocomplete="off">
+                  </form>
+                  <svg class="search-border" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" viewBox="0 0 671 111" style="enable-background:new 0 0 671 111;"
+                   xml:space="preserve">
+                      <path class="border" d="M335.5,108.5h-280c-29.3,0-53-23.7-53-53v0c0-29.3,23.7-53,53-53h280"/>
+                      <path class="border" d="M335.5,108.5h280c29.3,0,53-23.7,53-53v0c0-29.3-23.7-53-53-53h-280"/>
+                    </svg>
+                  <div class="go-icon"><i class="fa fa-arrow-right"></i></div>
+                </div>
+            
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+	
+	<main>
+		<p>Welcome to my webpage!</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod non mi sed dapibus. Duis gravida euismod nibh, vel tempor enim suscipit a. Nulla facilisi. Nulla luctus sapien sit amet mi lobortis, ac malesuada metus efficitur. Fusce at tellus euismod, aliquam massa at, malesuada dolor. Nulla facilisi.</p>
+	</main>
+	
+	<footer>
+		<p>&copy; 2023 My Webpage</p>
+	</footer>
 </body>
 </html>
