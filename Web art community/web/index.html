@@ -22,18 +22,23 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
+
         <a class="navbar-brand" href="#">Gallery Land</a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
           <ul class="navbar-nav me-auto mb-3 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,92 +52,44 @@
                 <li><a class="dropdown-item" href="#">More...</a></li>
               </ul>
             </li>
+
           </ul>
-          <div class="input-group col-md-8">
-            <div class="container-fluid">
-              <div class="searchBar">
-                <input id="searchQueryInput" type="text" name="searchQueryInput"
-                  placeholder="Search" value />
-                <button id="searchQuerySubmit" type="submit"
-                  name="searchQuerySubmit">
-                  <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path
-                      fill="#666666"
-                      d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-                  </svg>
-                </button>
-              </div>
 
-            </div>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-text">Already have an account?</p></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b>
-                <span class="caret"></span></a>
-              <ul id="login-dp" class="dropdown-menu">
-                <li>
-                  <div class="row">
-                    <div class="col-md-12">
-                      Login via
-                      <div class="social-buttons">
-                        <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i>
-                          Facebook</a>
-                        <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i>
-                          Twitter</a>
-                      </div>
-                      or
-                      <form class="form" role="form" method="post"
-                        action="login" accept-charset="UTF-8" id="login-nav">
-                        <div class="form-group">
-                          <label class="sr-only" for="exampleInputEmail2">Email
-                            address</label>
-                          <input type="email" class="form-control"
-                            id="exampleInputEmail2" placeholder="Email address"
-                            required>
-                        </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="exampleInputPassword2">Password</label>
-                          <input type="password" class="form-control"
-                            id="exampleInputPassword2" placeholder="Password"
-                            required>
-                          <div class="help-block text-right"><a href>Forget the
-                              password ?</a></div>
-                        </div>
-                        <div class="form-group">
-                          <button type="submit"
-                            class="btn btn-primary btn-block">Sign in</button>
-                        </div>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox"> keep me logged-in
-                          </label>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="bottom text-center">
-                      New here ? <a href="#"><b>Join Us</b></a>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+        </div>
 
-        <main>
-          <p>Welcome to my webpage!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            euismod
-            non mi sed dapibus. Duis gravida euismod nibh, vel tempor enim
-            suscipit
-            a. Nulla facilisi. Nulla luctus sapien sit amet mi lobortis, ac
-            malesuada metus efficitur. Fusce at tellus euismod, aliquam massa
-            at,
-            malesuada dolor. Nulla facilisi.</p>
-        </main>
+        <div class="input-group col-md-8 searchBar">
+          <input id="searchQueryInput" type="text" name="searchQueryInput"
+            placeholder="Search" value />
+          <button id="searchQuerySubmit" type="submit"
+            name="searchQuerySubmit">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path
+                fill="#666666"
+                d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
-        <footer>
-          <p>&copy; 2023 My Webpage</p>
-        </footer>
-      </body>
-    </html>
+      <div class="col-md-2">
+        <button class="btnLogin-popup">Login</button>
+        <button class="btnSignUp-popup">Sign Up</button>
+      </div>
+    </nav>
+
+    <main>
+      <p>Welcome to my webpage!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+        euismod
+        non mi sed dapibus. Duis gravida euismod nibh, vel tempor enim
+        suscipit
+        a. Nulla facilisi. Nulla luctus sapien sit amet mi lobortis, ac
+        malesuada metus efficitur. Fusce at tellus euismod, aliquam massa
+        at,
+        malesuada dolor. Nulla facilisi.</p>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 My Webpage</p>
+    </footer>
+  </body>
+</html>

@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/web/index.html</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/model/Address.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/web/employee.jsp</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/controller/ArrayOfString.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/controller/NameServlet.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/controller/NameServlet2.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/model/Name.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/web/display.jsp</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/web/nameObj.jsp</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/web/nameObj2.jsp</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/model/Employee.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab5/JavaWebLab5/src/java/controller/employee.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/web/index.html</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/src/java/controller/ArrayOfString.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/src/java/model/Employee.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/src/java/controller/employee.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/src/java/controller/NameServlet.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/src/java/controller/NameServlet2.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/JavaWebLab5/web/display.jsp</file>
         </group>
     </open-files>
 </project-private>

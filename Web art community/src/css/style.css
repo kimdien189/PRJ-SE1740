@@ -78,6 +78,7 @@ html, body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-left: 5%;
   }
   
   #searchQueryInput {
@@ -103,43 +104,50 @@ html, body {
   #searchQuerySubmit:hover {
     cursor: pointer;
   }
-  #login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
-}
-#login-dp .help-block{
-    font-size:12px    
-}
-#login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
-}
-#login-dp .social-buttons{
-    margin:12px 0    
-}
-#login-dp .social-buttons a{
-    width: 49%;
-}
-#login-dp .form-group {
-    margin-bottom: 10px;
-}
-.btn-fb{
+  .btnLogin-popup{
+    width:  90px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
     color: #fff;
-    background-color:#3b5998;
-}
-.btn-fb:hover{
+    font-weight: 500;
+    margin-left: 50px;
+    background-image: linear-gradient(to right, #278fe5 0%, #1e66a1  51%, #ffffff  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 10px #000000;
+    display: inline ;
+  }
+  .btnLogin-popup:hover {
+    background-position: right center; /* change the direction of the change here */
     color: #fff;
-    background-color:#496ebc 
-}
-.btn-tw{
+    text-decoration: none;
+  }
+  .btnSignUp-popup{
+    width:  90px;
+    height: 40px;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
     color: #fff;
-    background-color:#55acee;
-}
-.btn-tw:hover{
+    font-weight: 500;
+    margin-right: 20px;
+    background-image: linear-gradient(to right, #e5ff63 0%, #f3b65a  51%, #f9a5ff  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 10px #000000;
+    display: inline ;
+  }
+  .btnSignUp-popup:hover {
+    background-position: right center; /* change the direction of the change here */
     color: #fff;
-    background-color:#59b5fa;
-}
+    text-decoration: none;
+  }
