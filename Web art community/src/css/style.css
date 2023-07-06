@@ -219,135 +219,133 @@ h2 {
 }
 .gallery-view {
   width: 95%;
+  height: 200%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-content: flex-start;
   padding: 0 8px;
   margin: auto;
 }
-.column-view {
-  flex: auto;
-  max-width: calc(100% / 6);
-  padding: 0px 8px;
+.image-view {
+  width: calc(100% / 6);
+  height: fit-content;
 }
 .image-view img {
-  border-radius: 20px;
+  padding: 0px 8px;
+  border-radius: 15px;
   margin: 8px 0px;
   vertical-align: middle;
   width: 100%;
+  height: auto;
 }
 .fab-container {
-	position: fixed;
-	bottom: 50px;
-	right: 50px;
-	z-index: 999;
-	cursor: pointer;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 999;
+  cursor: pointer;
 }
 
 .fab-icon-holder {
-	width: 50px;
-	height: 50px;
-	border-radius: 100%;
-	background: #00767a;
-	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #00767a;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-out;
 }
 
-.fab-icon-holder:hover{
-	box-shadow: 0 6px 20px #949499;
+.fab-icon-holder:hover {
+  box-shadow: 0 6px 20px #949499;
   transform: scale(1.2);
 }
 
 .fab-icon-holder i {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	height: 100%;
-	font-size: 25px;
-	color: #ffffff;
+  height: 100%;
+  font-size: 25px;
+  color: #ffffff;
 }
 
 .fab {
-	width: 60px;
-	height: 60px;
-	background: #00a06b;
+  width: 60px;
+  height: 60px;
+  background: #00a06b;
 }
 
 .fab-options {
-	list-style-type: none;
-	margin: 0;
-	position: absolute;
-	bottom: 70px;
-	right: 0;
-	opacity: 0;
-	transition: all 0.3s ease;
-	transform: scale(0);
-	transform-origin: 85% bottom;
+  list-style-type: none;
+  margin: 0;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: scale(0);
+  transform-origin: 85% bottom;
 }
 
-.fab:hover + .fab-options, .fab-options:hover {
-	opacity: 1;
-	transform: scale(1);
+.fab:hover + .fab-options,
+.fab-options:hover {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .fab-options li {
-	display: flex;
-	justify-content: flex-end;
-	padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
 }
 
 .fab-label {
-	padding: 2px 5px;
-	align-self: center;
-	user-select: none;
-	white-space: nowrap;
-	border-radius: 3px;
-	font-size: 16px;
-	background: #666666;
-	color: #ffffff;
-	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-	margin-right: 10px;
+  padding: 2px 5px;
+  align-self: center;
+  user-select: none;
+  white-space: nowrap;
+  border-radius: 3px;
+  font-size: 16px;
+  background: #666666;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
 }
-
-
-
 
 /* Media query for responsive img gallery */
 @media (max-width: 1684px) {
   .card-title {
     font-size: 16px;
   }
-  #column6 {
-    display: none;
+  .image-view {
+    width: calc(100% / 5);
   }
-  .column-view {
-    max-width: calc(100% / 5);
+  .gallery-view{
+    height: 250%;
   }
 }
 @media (max-width: 1200px) {
   .card-title {
     font-size: 15px;
   }
-  #column6,
-  #column5 {
-    display: none;
+  .image-view {
+    width: calc(100% / 4);
   }
-  .column-view {
-    max-width: calc(100% / 4);
+  .gallery-view{
+    height: 300%;
   }
 }
 @media (max-width: 992px) {
   .card-title {
     font-size: 13px;
   }
-  #column6,
-  #column5,
-  #column4 {
-    display: none;
+  .image-view {
+    width: calc(100% / 3);
   }
-  .column-view {
-    max-width: calc(100% / 3);
+  .gallery-view{
+    height: 400%;
   }
 }
 
@@ -356,26 +354,21 @@ h2 {
   .card-title {
     font-size: 12px;
   }
-  #column6,
-  #column5,
-  #column4 {
-    display: none;
+  .image-view {
+    width: calc(100% / 3);
   }
-  .column-view {
-    max-width: calc(100% / 3);
+  .gallery-view{
+    height: 400%;
   }
 }
 @media (max-width: 480px) {
   .card-title {
     font-size: 11px;
   }
-  #column6,
-  #column5,
-  #column4,
-  #column3 {
-    display: none;
+  .image-view {
+    width: calc(100% / 2);
   }
-  .column-view {
-    max-width: calc(100% / 2);
+  .gallery-view{
+    height: 600%;
   }
 }

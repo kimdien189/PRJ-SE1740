@@ -1,5 +1,4 @@
 const toTopBtn = document.getElementById("to-top-btn");
-
 toTopBtn.addEventListener("click", function() {
   console.log("Button clicked!");
   document.documentElement.scrollTop = 0;
