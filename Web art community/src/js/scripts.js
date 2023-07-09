@@ -1,13 +1,10 @@
-const toTopBtn = document.getElementById("to-top-btn");
-toTopBtn.addEventListener("click", function() {
-  console.log("Button clicked!");
-  document.documentElement.scrollTop = 0;
-});
+// Get the "To top" button element
+var toTopButton = document.getElementById('to-top-btn');
 
-window.addEventListener("scroll", function() {
-  if (document.documentElement.scrollTop > 200) {
-    toTopBtn.style.display = "block";
-  } else {
-    toTopBtn.style.display = "none";
-  }
-});
+// Add a click event listener to the button
+toTopButton.addEventListener("click", backToTop);
+
+function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}

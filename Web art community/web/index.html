@@ -1,4 +1,4 @@
-li<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>My Webpage</title>
@@ -19,7 +19,6 @@ li<!DOCTYPE html>
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../src/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../src/js/scripts.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -73,246 +72,342 @@ li<!DOCTYPE html>
         <div class="col-sm-12 col-md-2 order-md-2">
           <div class="collapse navbar-collapse login-user"
             id="navbarSupportedContent">
-            <button class="btnLogin-popup">Login</button>
-            <button class="btnSignUp-popup">Sign Up</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+              data-bs-target="#ModalFormLogin">Login</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+              data-bs-target="#ModalFormSignUp">Sign Up</button>
           </div>
         </div>
       </div>
     </nav>
-
-    <main>
-      <div class="fab-container">
-        <div class="fab fab-icon-holder">
+    <div class="modal fade" id="ModalFormLogin" tabindex="-1"
+      aria-labelledby="ModalFormLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="btn-close btn-close-white"
+              data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="myform bg-dark">
+              <h1 class="text-center">Gallery Land</h1>
+              <form>
+                <div class="mb-3 mt-4">
+                  <label for="exampleInputEmail1" class="form-label">Username</label>
+                  <input type="email" class="form-control"
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control"
+                    id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+                <p>Not a member? <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#ModalFormSignUp">Signup now</a></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="ModalFormSignUp" tabindex="-1"
+      aria-labelledby="ModalFormLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="btn-close btn-close-white"
+              data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="myform bg-dark">
+              <h1 class="text-center">Gallery Land</h1>
+              <form>
+                <div class="mb-3 mt-4">
+                  <label for="exampleInputEmail1" class="form-label">Username</label>
+                  <input type="email" class="form-control"
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control"
+                    id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Confirm
+                    Password</label>
+                  <input type="password" class="form-control"
+                    id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-light mt-3">Sign Up</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fab-container">
+      <div class="fab shadow">
+        <div class="fab-content">
           <i class="fa-solid fa-caret-up"></i>
         </div>
-    
-        <ul class="fab-options">
-          <li>
-            <span class="fab-label">To top</span>
-            <div class="fab-icon-holder" id="to-top-btn">
-              <i class="fa-solid fa-arrow-up"></i>
-            </div>
-          </li>
-          <li>
-            <span class="fab-label">Refresh</span>
-            <div class="fab-icon-holder">
-              <i class="fa-solid fa-rotate-right"></i>
-            </div>
-          </li>
-          <li>
-            <span class="fab-label">New to you</span>
-            <div class="fab-icon-holder">
-              <i class="fa-solid fa-star"></i>
-            </div>
-          </li>
-          <li>
-            <span class="fab-label">Help</span>
-            <div class="fab-icon-holder">
-              <i class="fa-solid fa-question"></i>
-            </div>
-          </li>
-        </ul>
       </div>
-      <div class="interests">
-        <div class="card">
-          <img class="card-img-top"
-            src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
-            alt="Card image cap">
-          <h5 class="card-title">Sky</h5>
+      <div class="sub-button shadow" id="to-top-btn">
+        <a id="to-top-btn">
+          <i class="fa-solid fa-arrow-up" ></i>
+        </a>
+      </div>
+      <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+          <i class="fa-solid fa-rotate-right"></i>
+        </a>
+      </div>
+      <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+          <i class="fa-solid fa-star"></i>
+        </a>
+      </div>
+      <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+          <i class="fa-solid fa-question"></i>
+        </a>
+      </div>
+    </div>
+    <div class="interests">
+      <div class="card">
+        <img class="card-img-top"
+          src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
+          alt="Card image cap">
+        <h5 class="card-title">Sky</h5>
+      </div>
+      <div class="card">
+        <img class="card-img-top"
+          src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
+          alt="Card image cap">
+        <h5 class="card-title">Sky2awgawgawgawgawgawgawgawgwag</h5>
+      </div>
+      <div class="card">
+        <img class="card-img-top"
+          src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
+          alt="Card image cap">
+        <h5 class="card-title">Sky3</h5>
+      </div>
+      <div class="card">
+        <img class="card-img-top"
+          src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
+          alt="Card image cap">
+        <h5 class="card-title">Sky3</h5>
+      </div>
+      <div class="card">
+        <img class="card-img-top"
+          src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
+          alt="Card image cap">
+        <h5 class="card-title">Sk4egfaegagawg</h5>
+      </div>
+    </div>
+    <ul class="gallery-view">
+      <div class="collum-view">
+        <div class="image-view">
+          <img src="../src/images/Fd6PLIRUYAA1eu9.png" loading="lazy">
+
         </div>
-        <div class="card">
-          <img class="card-img-top"
-            src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
-            alt="Card image cap">
-          <h5 class="card-title">Sky2awgawgawgawgawgawgawgawgwag</h5>
+        <div class="image-view">
+          <img src="../src/images/ep304p3xzsr61.webp" loading="lazy">
+
         </div>
-        <div class="card">
-          <img class="card-img-top"
-            src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
-            alt="Card image cap">
-          <h5 class="card-title">Sky3</h5>
+        <div class="image-view">
+          <img src="../src/images/chun-lo-astro-2.jpg" loading="lazy">
+
         </div>
-        <div class="card">
-          <img class="card-img-top"
-            src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
-            alt="Card image cap">
-          <h5 class="card-title">Sky3</h5>
+        <div class="image-view">
+          <img src="../src/images/kdvmzon6slvy.jpg" loading="lazy">
+
         </div>
-        <div class="card">
-          <img class="card-img-top"
-            src="../src/images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
-            alt="Card image cap">
-          <h5 class="card-title">Sk4egfaegagawg</h5>
+        <div class="image-view">
+          <img src="../src/images/undefined - Imgur.jpg" loading="lazy">
+
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Doctor'sPersonalityTest.jpg" loading="lazy">
         </div>
       </div>
+      <div class="collum-view">
+        <div class="image-view">
+          <img src="../src/images/4cf9175e99df86c9348cb1657e3f4418.jpg"
+            loading="lazy">
 
-      <ul class="gallery-view">
-          <div class="image-view">
-            <img src="../src/images/Fd6PLIRUYAA1eu9.png" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/5d8758e8ccc4c67c4b700a42fddd563d.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/ep304p3xzsr61.webp" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/077714ff33c8e9aaa71cdc83b34c241a.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/chun-lo-astro-2.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/81238981_p0.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/kdvmzon6slvy.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/91173778_p0.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/undefined - Imgur.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/108303543_p0.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/Doctor'sPersonalityTest.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/214122224.png.jfif" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/4cf9175e99df86c9348cb1657e3f4418.jpg"
-              loading="lazy">
+        </div>
+      </div>
+      <div class="collum-view">
+        <div class="image-view">
+          <img
+            src="../src/images/318804174_809414696792195_3356938123226488468_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/5d8758e8ccc4c67c4b700a42fddd563d.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/335166533_174360958294450_349101779847201842_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/077714ff33c8e9aaa71cdc83b34c241a.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/336358666_1593266237859413_4641102179905908787_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/81238981_p0.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/340825299_1262609987997243_3135648658459637892_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/91173778_p0.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/2143436578787653.png" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/108303543_p0.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Caaaaarrot_2525-1618405126347325440-0.jpg"
+            loading="lazy">
+        </div>
+      </div>
+      <div class="collum-view">
+        <div class="image-view">
+          <img src="../src/images/doodle art2.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/214122224.png.jfif" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/EBFOisxVAAEFaBG.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/305965136_1822293411468443_6780996164183798705_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/FdEJk1qacAE7job.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/310154049_1041705399843898_4059105897198154554_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/FIHRDHEacAEdRZB.jfif" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/310520033_530604865559720_418745114902179960_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/FIHSPgGaMAA1Xbz.jfif" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/318804174_809414696792195_3356938123226488468_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Fj_sUMIVIAAwISa.jfif" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/335166533_174360958294450_349101779847201842_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Fvsy4_jaMAA52_P.jfif" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/336358666_1593266237859413_4641102179905908787_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/FY_MdyfaQAAdfR4.jfif" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img
-              src="../src/images/340825299_1262609987997243_3135648658459637892_n.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Fd6PLIRUYAA1eu9.png" loading="lazy">
+        </div>
+      </div>
+      <div class="collum-view">
+        <div class="image-view">
+          <img src="../src/images/ep304p3xzsr61.webp" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/2143436578787653.png" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/chun-lo-astro-2.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/Caaaaarrot_2525-1618405126347325440-0.jpg"
-              loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/kdvmzon6slvy.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/doodle art2.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/undefined - Imgur.jpg" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/EBFOisxVAAEFaBG.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Doctor'sPersonalityTest.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/305965136_1822293411468443_6780996164183798705_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/FdEJk1qacAE7job.jpg" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/310154049_1041705399843898_4059105897198154554_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/FIHRDHEacAEdRZB.jfif" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/310520033_530604865559720_418745114902179960_n.jpg"
+            loading="lazy">
+        </div>
+      </div>
+      <div class="collum-view">
+        <div class="image-view">
+          <img
+            src="../src/images/318804174_809414696792195_3356938123226488468_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/FIHSPgGaMAA1Xbz.jfif" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/335166533_174360958294450_349101779847201842_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/Fj_sUMIVIAAwISa.jfif" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/336358666_1593266237859413_4641102179905908787_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/Fvsy4_jaMAA52_P.jfif" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img
+            src="../src/images/340825299_1262609987997243_3135648658459637892_n.jpg"
+            loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/FY_MdyfaQAAdfR4.jfif" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/2143436578787653.png" loading="lazy">
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/Fd6PLIRUYAA1eu9.png" loading="lazy">
+        </div>
+        <div class="image-view">
+          <img src="../src/images/Caaaaarrot_2525-1618405126347325440-0.jpg"
+            loading="lazy">
+        </div>
+      </div>
+    </ul>
+    <script src="../src/js/scripts.js"></script>
 
-          </div>
-          <div class="image-view">
-            <img src="../src/images/ep304p3xzsr61.webp" loading="lazy">
-
-          </div>
-          <div class="image-view">
-            <img src="../src/images/chun-lo-astro-2.jpg" loading="lazy">
-
-          </div>
-          <div class="image-view">
-            <img src="../src/images/kdvmzon6slvy.jpg" loading="lazy">
-
-          </div>
-          <div class="image-view">
-            <img src="../src/images/undefined - Imgur.jpg" loading="lazy">
-
-          </div>
-          <div class="image-view">
-            <img src="../src/images/Doctor'sPersonalityTest.jpg" loading="lazy">
-
-          </div>
-      </ul>
-
-      <footer>
-        <p>&copy; 2023 My Webpage</p>
-      </footer>
-    </body>
-  </html>
+    <footer>
+      <p>&copy; 2023 My Webpage</p>
+    </footer>
+  </body>
+</html>
