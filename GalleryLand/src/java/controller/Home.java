@@ -56,7 +56,7 @@ public class Home extends HttpServlet {
                 }
                 if(uname != null && pass != null && uname.equals(a) && pass.equals(b)){
                     
-                   request.getRequestDispatcher("Detail.jsp").forward(request, response);
+                   request.getRequestDispatcher("index.jsp").forward(request, response);
                     return;
                 }
                 response.sendRedirect("login");

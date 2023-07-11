@@ -67,7 +67,7 @@ public class LoginSession extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("index.html").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**
@@ -106,7 +106,7 @@ public class LoginSession extends HttpServlet {
         }
         else //login fail
         {
-            response.sendRedirect("index.html");
+            response.sendRedirect("index.jsp");
         }
     }
 

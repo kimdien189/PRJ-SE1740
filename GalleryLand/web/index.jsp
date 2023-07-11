@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : Jul 11, 2023, 8:08:50 AM
+    Author     : kimdi
+--%>
+<%@page import="model.Account"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -68,14 +75,38 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="col-sm-12 col-md-2 order-md-2">
-                    <div class="collapse navbar-collapse login-user"
-                         id="navbarSupportedContent">
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                data-bs-target="#ModalFormLogin">Login</button>
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                data-bs-target="#ModalFormSignUp">Sign Up</button>
-                    </div>
+                <div id="login-buttons" class="collapse navbar-collapse login-user" id="navbarSupportedContent">
+                    <%
+Account account = (Account) session.getAttribute("account");
+if (account != null) {
+    // User is already authenticated, so set the user detail attribute
+    request.setAttribute("userdetail", account.getDisplayname());
+} else {
+    // User is not authenticated, check if there is a user detail cookie
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userdetail")) {
+                // User detail cookie found, set the user detail attribute
+                request.setAttribute("userdetail", cookie.getValue());
+                break;  // Stop searching for cookies
+            }
+        }
+    }
+}
+                    %>
+
+                    <input type="hidden" id="account" value="<%= request.getAttribute("userdetail") %>">
+
+                    <%
+                    if (request.getAttribute("userdetail") != null) {
+                        // User is already authenticated, so display personalized welcome message
+                    %>
+                    <button type="button" class="btn btn-dark" disabled>Welcome, <%= request.getAttribute("userdetail") %></button>
+                    <% } else { %>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalFormLogin">Login</button>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalFormSignUp">Sign Up</button>
+                    <% } %>
                 </div>
             </div>
         </nav>

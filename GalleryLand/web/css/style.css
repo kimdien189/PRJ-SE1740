@@ -147,7 +147,6 @@ h2 {
   transition: 0.5s;
   background-size: 200% auto;
   color: #e6e6ea;
-  display: inline;
 }
 .btn:hover {
   background-position: right center; /* change the direction of the change here */

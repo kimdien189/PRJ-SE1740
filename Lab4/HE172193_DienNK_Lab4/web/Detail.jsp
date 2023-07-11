@@ -15,21 +15,21 @@
                 request.setAttribute("userdetail", account.getDisplayname());
             }else{
         %>
-            <%
-            Cookie[] cookie = request.getCookies();
-            if(cookie != null){
-                for (Cookie ck : cookie) {
-                   if(ck.getName().equals("detail")){     
-                    request.setAttribute("userdetail", ck.getValue());
-            %>
-                
-               
-            <%}}}}
-            %>
-           <%if(request.getAttribute("userdetail") == null){
-               response.sendRedirect("login.jsp");
-           }%>
-           
-           <h4>Hello: <%=request.getAttribute("userdetail")%></h4>
+        <%
+        Cookie[] cookie = request.getCookies();
+        if(cookie != null){
+            for (Cookie ck : cookie) {
+               if(ck.getName().equals("detail")){     
+                request.setAttribute("userdetail", ck.getValue());
+        %>
+
+
+        <%}}}}
+        %>
+        <%if(request.getAttribute("userdetail") == null){
+            response.sendRedirect("login.jsp");
+        }%>
+
+        <h4>Hello: <%=request.getAttribute("userdetail")%></h4>
     </body>
 </html>
