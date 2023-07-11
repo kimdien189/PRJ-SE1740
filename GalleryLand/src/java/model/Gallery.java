@@ -33,7 +33,7 @@ public class Gallery {
     //13 isHistoric;
     //14 isModern;
     //15 isAbstract;
-    private boolean[] tags = new boolean[20];
+    private boolean[] tags = new boolean[15];
 
     public Gallery(String ID, String URL, String name, String creator, Date dateCreated, int likes, boolean[] tags) {
         this.ID = ID;

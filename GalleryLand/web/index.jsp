@@ -199,7 +199,7 @@ if (account != null) {
         <div class="interests">
             <div class="card">
                 <img class="card-img-top"
-                     src="images/58da6de7b6e0458374d2ef8cf74a223d.jpg"
+                     src="https://drive.google.com/uc?id=1QuEH1qEL0XAdjxTfv1zv3cwaX5ciiEM8"
                      alt="Card image cap">
                 <h5 class="card-title">Sky</h5>
             </div>

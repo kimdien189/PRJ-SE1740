@@ -3,7 +3,6 @@ package DAL;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +13,6 @@ import model.Gallery;
 public class GalleryDAO extends BaseDAO {
 
     private static final String EXCLUDED_IDS_COOKIE_NAME = "excludedIds";
-    private DataSource dataSource;
-
-    public GalleryDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     public List<Gallery> getRandomImages() throws SQLException {
         List<String> excludedIds = getExcludedIdsFromCookie();
@@ -128,4 +122,20 @@ public class GalleryDAO extends BaseDAO {
             return responseHolder.get();
         }
     }
+    public static void main(String[] args) {
+    try {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        ThreadLocalServlet.set(request, response);
+        GalleryDAO galleryDAO = new GalleryDAO();
+        List<Gallery> images = galleryDAO.getRandomImages();
+        for (Gallery image : images) {
+            System.out.println(image.getID() + ": " + image.getname());
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    } finally {
+        ThreadLocalServlet.unset();
+    }
+}
 }

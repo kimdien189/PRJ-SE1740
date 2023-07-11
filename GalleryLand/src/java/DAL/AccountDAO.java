@@ -33,7 +33,7 @@ public class AccountDAO extends BaseDAO {
                
                user.setUsername(rs.getString("username"));
                user.setPassword(rs.getString("password"));
-               user.setDisplayname(rs.getString("displayname"));
+               user.setDisplayname(rs.getString("nickname"));
                return user;
            }
            
