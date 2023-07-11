@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/web/Detail.jsp</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/web/login.jsp</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/src/java/controller/LoginSession.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/src/java/model/Account.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/src/java/dal/AccountDAO.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/src/java/dal/BaseDAO.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/src/java/controller/Home.java</file>
-            <file>file:/D:/FPT/PRJ/New%20folder%20(2)/HE176657_TriNM_Lab4/HE176657_TriNM_Lab4/web/index.html</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/web/login.jsp</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/src/java/dal/AccountDAO.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/src/java/dal/BaseDAO.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/web/index.html</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/src/java/controller/Home.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/web/Detail.jsp</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/src/java/model/Account.java</file>
+            <file>file:/D:/FPT/PRJ/PRJ-SE1740/Lab4/HE172193_DienNK_Lab4/src/java/controller/LoginSession.java</file>
         </group>
     </open-files>
 </project-private>
