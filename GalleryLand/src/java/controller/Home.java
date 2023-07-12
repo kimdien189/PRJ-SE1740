@@ -37,7 +37,7 @@ public class Home extends HttpServlet {
             String a = (String) session.getAttribute("a");
             String b = (String) session.getAttribute("b");
             if (account != null) {
-                request.getRequestDispatcher("Detail.jsp").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
                 session.removeAttribute("account");
             } else {
                 Cookie[] cookies = request.getCookies();
@@ -61,6 +61,7 @@ public class Home extends HttpServlet {
                 }
                 response.sendRedirect("login");
             }
+            
         }
     } 
 

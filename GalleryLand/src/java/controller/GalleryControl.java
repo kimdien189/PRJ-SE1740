@@ -5,7 +5,7 @@
  */
 package controller;
 
-import DAL.AccountDAO;
+import DAL.GalleryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +13,20 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Account;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import model.Gallery;
 
 /**
  *
  * @author macbookair
  */
-public class LoginSession extends HttpServlet {
+public class GalleryControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,21 +37,31 @@ public class LoginSession extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final String EXCLUDED_IDS_COOKIE_NAME = "excludedIds";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginSession</title>");            
+            out.println("<title>Servlet LoginSession</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoginSession at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
+    }
+
+    private String joinExcludedIds(List<String> ids) {
+        StringJoiner joiner = new StringJoiner(",");
+        for (String id : ids) {
+            joiner.add(id.toString());
+        }
+        return joiner.toString();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,32 +90,42 @@ public class LoginSession extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        AccountDAO db = new AccountDAO();
-        Account account =  db.getAccountByUsernameAndPassword(username, password);
-        if(account != null) // login successful!
-        {
-            String remember = request.getParameter("remember");
-            if(remember !=null)
-            {
-                Cookie c_user = new Cookie("username", username);
-                Cookie c_pass = new Cookie("password", password);
-                Cookie c_detail= new Cookie("detail", account.getDisplayname());
-                c_user.setMaxAge(3600*24*30);
-                c_pass.setMaxAge(3600*24*30);
-                c_pass.setMaxAge(3600*24*30);
-                response.addCookie(c_pass);
-                response.addCookie(c_user);
-                response.addCookie(c_detail);
+        GalleryDAO galleryDAO = new GalleryDAO();
+        List<String> ids = new ArrayList<>();
+        Cookie[] cookies = request.getCookies();
+        StringJoiner joiner = new StringJoiner(",");
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(EXCLUDED_IDS_COOKIE_NAME)) {
+                    String[] idStrings = cookie.getValue().split(",");
+                    for (String idString : idStrings) {
+                        ids.add(idString);
+                    }
+                    break;
+                }
             }
-            HttpSession session = request.getSession();
-            session.setAttribute("account", account);
-            response.sendRedirect("home");
-        }
-        else //login fail
-        {
-            response.sendRedirect("index.jsp");
+            try {
+                List<Gallery> images = galleryDAO.getRandomImages(ids);
+                List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
+                for (String id : excludedIds) {
+                    if (!ids.contains(id)) {
+                        ids.add(id);
+                        joiner.add(id);
+                    }
+                }
+                Cookie cookie = new Cookie(EXCLUDED_IDS_COOKIE_NAME, joiner.toString());
+                cookie.setMaxAge(3600); // 1 hour
+                cookie.setPath("/");
+                response.addCookie(cookie);
+                // Set the images as a request attribute
+                System.out.println(images.size());
+                request.setAttribute("images", images);
+                // Forward the request to the index.jsp file
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 

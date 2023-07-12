@@ -3,6 +3,7 @@
     Created on : Jul 11, 2023, 8:08:50 AM
     Author     : kimdi
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -75,27 +76,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div id="login-buttons" class="collapse navbar-collapse login-user" id="navbarSupportedContent">
-                    <%
-Account account = (Account) session.getAttribute("account");
-if (account != null) {
-    // User is already authenticated, so set the user detail attribute
-    request.setAttribute("userdetail", account.getDisplayname());
-} else {
-    // User is not authenticated, check if there is a user detail cookie
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("userdetail")) {
-                // User detail cookie found, set the user detail attribute
-                request.setAttribute("userdetail", cookie.getValue());
-                break;  // Stop searching for cookies
-            }
-        }
-    }
-}
-                    %>
-
+                <div id="login-buttons" class="collapse navbar-collapse login-user" id = "navbarSupportedContent">
                     <input type="hidden" id="account" value="<%= request.getAttribute("userdetail") %>">
 
                     <%
@@ -230,171 +211,33 @@ if (account != null) {
         </div>
         <ul class="gallery-view">
             <div class="collum-view">
-                <div class="image-view">
-                    <img src="images/Fd6PLIRUYAA1eu9.png" loading="lazy">
+                <c:forEach items="${images}" var="o">
+                    <div class="image-view">
+                        <img src="${o.URL}" loading="lazy">
+                    </div>
+                </c:forEach>
 
-                </div>
-                <div class="image-view">
-                    <img src="images/ep304p3xzsr61.webp" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/chun-lo-astro-2.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/kdvmzon6slvy.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/undefined - Imgur.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Doctor'sPersonalityTest.jpg" loading="lazy">
-                </div>
             </div>
             <div class="collum-view">
-                <div class="image-view">
-                    <img src="images/4cf9175e99df86c9348cb1657e3f4418.jpg"
-                         loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/5d8758e8ccc4c67c4b700a42fddd563d.jpg"
-                         loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/077714ff33c8e9aaa71cdc83b34c241a.jpg"
-                         loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/81238981_p0.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/91173778_p0.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/108303543_p0.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/214122224.png.jfif" loading="lazy">
-
-                </div>
+                <c:forEach items="${images}" var="o">
+                    <div class="image-view">
+                        <img src="${o.URL}" loading="lazy">
+                    </div>
+                </c:forEach>
             </div>
             <div class="collum-view">
-                <div class="image-view">
-                    <img
-                        src="images/318804174_809414696792195_3356938123226488468_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/335166533_174360958294450_349101779847201842_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/336358666_1593266237859413_4641102179905908787_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/340825299_1262609987997243_3135648658459637892_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/2143436578787653.png" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Caaaaarrot_2525-1618405126347325440-0.jpg"
-                         loading="lazy">
-                </div>
+                <c:forEach items="${images}" var="o">
+                    <div class="image-view">
+                        <img src="${o.URL}" loading="lazy">
+                    </div>
+                </c:forEach>
             </div>
             <div class="collum-view">
-                <div class="image-view">
-                    <img src="images/doodle art2.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/EBFOisxVAAEFaBG.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/FdEJk1qacAE7job.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/FIHRDHEacAEdRZB.jfif" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/FIHSPgGaMAA1Xbz.jfif" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Fj_sUMIVIAAwISa.jfif" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Fvsy4_jaMAA52_P.jfif" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/FY_MdyfaQAAdfR4.jfif" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Fd6PLIRUYAA1eu9.png" loading="lazy">
-                </div>
-            </div>
-            <div class="collum-view">
-                <div class="image-view">
-                    <img src="images/ep304p3xzsr61.webp" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/chun-lo-astro-2.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/kdvmzon6slvy.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/undefined - Imgur.jpg" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Doctor'sPersonalityTest.jpg" loading="lazy">
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/305965136_1822293411468443_6780996164183798705_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/310154049_1041705399843898_4059105897198154554_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/310520033_530604865559720_418745114902179960_n.jpg"
-                        loading="lazy">
-                </div>
+                <c:forEach items="${images}" var="o">
+                    <div class="image-view">
+                        <img src="${o.URL}" loading="lazy">
+                    </div>
+                </c:forEach>
             </div>
             <div class="collum-view">
                 <div class="image-view">
