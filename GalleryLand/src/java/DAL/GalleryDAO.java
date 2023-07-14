@@ -20,11 +20,11 @@ public class GalleryDAO extends BaseDAO {
         StringJoiner joiner = new StringJoiner(",");
         excludedIds.forEach(id -> joiner.add("'" + id + "'"));
         String excludedIdsString = joiner.toString();
-        String query = "SELECT * FROM images";
+        String query = "SELECT TOP 60 * FROM images";
         if (!excludedIds.isEmpty()) {
             query += " WHERE id NOT IN (" + excludedIdsString + ")";
         }
-        query += " ORDER BY RAND()";
+        query += " ORDER BY NEWID()";
         return query;
     }
 
@@ -55,4 +55,21 @@ public class GalleryDAO extends BaseDAO {
 
         return images;
     }
+    /*
+    public static void main(String[] args) {
+        try {
+            GalleryDAO galleryDAO = new GalleryDAO();
+            List<String> excludedIds = new ArrayList<>();
+            excludedIds.add("1");
+            excludedIds.add("2");
+            List<Gallery> images = galleryDAO.getRandomImages(excludedIds);
+            for (Gallery image : images) {
+                System.out.println(image.getURL());
+            }
+        } catch (SQLException ex) {
+            System.err.println("An error occurred while retrieving images: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+     */
 }

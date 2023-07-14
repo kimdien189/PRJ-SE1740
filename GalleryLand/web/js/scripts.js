@@ -1,3 +1,4 @@
+
 // Get the "To top" button element
 var toTopButton = document.getElementById('to-top-btn');
 

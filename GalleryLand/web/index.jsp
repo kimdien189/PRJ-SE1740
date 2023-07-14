@@ -5,6 +5,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Account"%>
+<%@page import="model.Gallery"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -77,14 +79,11 @@
                 </button>
 
                 <div id="login-buttons" class="collapse navbar-collapse login-user" id = "navbarSupportedContent">
-                    <input type="hidden" id="account" value="<%= request.getAttribute("userdetail") %>">
-
-                    <%
-                    if (request.getAttribute("userdetail") != null) {
-                        // User is already authenticated, so display personalized welcome message
-                    %>
-                    <button type="button" class="btn btn-dark" disabled>Welcome, <%= request.getAttribute("userdetail") %></button>
-                    <% } else { %>
+                    <% Account account = (Account) request.getAttribute("account"); %>
+                    <% if (account != null) { %>
+                    <button type="button" class="btn btn-dark" >Welcome, <%= account.getDisplayname() %></button>
+                    <% } %>
+                    <% if (account == null) { %>
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalFormLogin">Login</button>
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalFormSignUp">Sign Up</button>
                     <% } %>
@@ -100,7 +99,11 @@
                                 data-bs-dismiss="modal" aria-label="Close"></button>
                         <div class="myform bg-dark">
                             <h1 class="text-center">Gallery Land</h1>
-                            <form action="login" method="POST">
+                            <form action="login" method="GET">
+                                <% String loginStatus = (String) request.getAttribute("loginStatus"); %>
+                                <% if (loginStatus == "fail") { %>
+                                <p class="text-danger">Wrong username or password</p>
+                                <% } %>
                                 <div class="mb-3 mt-4">
                                     <label for="exampleInputEmail1" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
@@ -108,6 +111,10 @@
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember" value="remember">
+                                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
                                 </div>
                                 <button type="submit" class="btn btn-light mt-3">LOGIN</button>
                                 <p>Not a member? <a href="#" data-bs-toggle="modal" data-bs-target="#ModalFormSignUp">Signup now</a></p>
@@ -210,69 +217,18 @@
             </div>
         </div>
         <ul class="gallery-view">
-            <div class="collum-view">
-                <c:forEach items="${images}" var="o">
+
+            <c:forEach items="${images}" var="o" varStatus="loop">
+                <c:if test="${loop.index % 10 == 0}">
+                    <div class="collum-view">
+                    </c:if>
                     <div class="image-view">
                         <img src="${o.URL}" loading="lazy">
                     </div>
-                </c:forEach>
-
-            </div>
-            <div class="collum-view">
-                <c:forEach items="${images}" var="o">
-                    <div class="image-view">
-                        <img src="${o.URL}" loading="lazy">
+                    <c:if test="${loop.index % 10 == 9 || loop.last}">
                     </div>
-                </c:forEach>
-            </div>
-            <div class="collum-view">
-                <c:forEach items="${images}" var="o">
-                    <div class="image-view">
-                        <img src="${o.URL}" loading="lazy">
-                    </div>
-                </c:forEach>
-            </div>
-            <div class="collum-view">
-                <c:forEach items="${images}" var="o">
-                    <div class="image-view">
-                        <img src="${o.URL}" loading="lazy">
-                    </div>
-                </c:forEach>
-            </div>
-            <div class="collum-view">
-                <div class="image-view">
-                    <img
-                        src="images/318804174_809414696792195_3356938123226488468_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/335166533_174360958294450_349101779847201842_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/336358666_1593266237859413_4641102179905908787_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img
-                        src="images/340825299_1262609987997243_3135648658459637892_n.jpg"
-                        loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/2143436578787653.png" loading="lazy">
-
-                </div>
-                <div class="image-view">
-                    <img src="images/Caaaaarrot_2525-1618405126347325440-0.jpg"
-                         loading="lazy">
-                </div>
-            </div>
+                </c:if>
+            </c:forEach>
         </ul>
         <script src="js/scripts.js"></script>
 

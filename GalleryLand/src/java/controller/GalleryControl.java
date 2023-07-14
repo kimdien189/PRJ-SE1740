@@ -7,12 +7,12 @@ package controller;
 
 import DAL.GalleryDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,23 +39,6 @@ public class GalleryControl extends HttpServlet {
      */
     private static final String EXCLUDED_IDS_COOKIE_NAME = "excludedIds";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginSession</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginSession at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     private String joinExcludedIds(List<String> ids) {
         StringJoiner joiner = new StringJoiner(",");
         for (String id : ids) {
@@ -76,7 +59,32 @@ public class GalleryControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        GalleryDAO galleryDAO = new GalleryDAO();
+        List<String> ids = new ArrayList<>();
+        StringJoiner joiner = new StringJoiner(",");
+
+        try {
+            List<Gallery> images = galleryDAO.getRandomImages(ids);
+            List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
+            for (String id : excludedIds) {
+                if (!ids.contains(id)) {
+                    ids.add(id);
+                    joiner.add(id);
+                }
+            }
+
+            String encodedValue = URLEncoder.encode(joiner.toString(), "UTF-8");
+            Cookie cookie = new Cookie(EXCLUDED_IDS_COOKIE_NAME, encodedValue);
+            cookie.setMaxAge(3600); // 1 hour
+            response.addCookie(cookie);
+            // Set the images as a request attribute
+            request.setAttribute("images", images);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            // Forward the request to the index.jsp file
+        } catch (SQLException ex) {
+            Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -90,45 +98,23 @@ public class GalleryControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        GalleryDAO galleryDAO = new GalleryDAO();
-        List<String> ids = new ArrayList<>();
-        Cookie[] cookies = request.getCookies();
-        StringJoiner joiner = new StringJoiner(",");
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(EXCLUDED_IDS_COOKIE_NAME)) {
-                    String[] idStrings = cookie.getValue().split(",");
-                    for (String idString : idStrings) {
-                        ids.add(idString);
-                    }
-                    break;
-                }
-            }
-            try {
-                List<Gallery> images = galleryDAO.getRandomImages(ids);
-                List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
-                for (String id : excludedIds) {
-                    if (!ids.contains(id)) {
-                        ids.add(id);
-                        joiner.add(id);
-                    }
-                }
-                Cookie cookie = new Cookie(EXCLUDED_IDS_COOKIE_NAME, joiner.toString());
-                cookie.setMaxAge(3600); // 1 hour
-                cookie.setPath("/");
-                response.addCookie(cookie);
-                // Set the images as a request attribute
-                System.out.println(images.size());
-                request.setAttribute("images", images);
-                // Forward the request to the index.jsp file
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
     }
 
+    /*
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        boolean[] tags1 = {true, false, true, false, false, true, false, true, false, true, false, false, true, false, true};
+        boolean[] tags2 = {false, true, false, true, false, true, false, true, true, false, true, false, false, true, false};
+        boolean[] tags3 = {true, true, true, false, true, false, true, false, false, true, false, true, false, true, false};
+        List<Gallery> images = new ArrayList<>();
+        images.add(new Gallery("1", "https://drive.google.com/uc?id=1nZmGeXP1uleF8i3mLO4FIa8FuGp3yKdB", "Gallery 1", "John Doe", new Date(System.currentTimeMillis()), 10, tags1));
+        images.add(new Gallery("1", "https://drive.google.com/uc?id=1nZmGeXP1uleF8i3mLO4FIa8FuGp3yKdB", "Gallery 1", "John Doe", new Date(System.currentTimeMillis()), 10, tags1));
+        images.add(new Gallery("1", "https://drive.google.com/uc?id=1nZmGeXP1uleF8i3mLO4FIa8FuGp3yKdB", "Gallery 1", "John Doe", new Date(System.currentTimeMillis()), 10, tags1));
+        request.setAttribute("images", images);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+     */
     /**
      * Returns a short description of the servlet.
      *

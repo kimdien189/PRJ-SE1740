@@ -34,12 +34,12 @@ public class LoginSession extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginSession</title>");            
+            out.println("<title>Servlet LoginSession</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoginSession at " + request.getContextPath() + "</h1>");
@@ -74,32 +74,39 @@ public class LoginSession extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AccountDAO db = new AccountDAO();
-        Account account =  db.getAccountByUsernameAndPassword(username, password);
-        if(account != null) // login successful!
+        Account account = db.getAccountByUsernameAndPassword(username, password);
+        if (account != null) // login successful!
         {
             String remember = request.getParameter("remember");
-            if(remember !=null)
-            {
+            if (remember != null) {
                 Cookie c_user = new Cookie("username", username);
                 Cookie c_pass = new Cookie("password", password);
-                Cookie c_detail= new Cookie("detail", account.getDisplayname());
-                c_user.setMaxAge(3600*24*30);
-                c_pass.setMaxAge(3600*24*30);
-                c_pass.setMaxAge(3600*24*30);
+                Cookie c_detail = new Cookie("detail", account.getDisplayname());
+                c_user.setMaxAge(3600 * 24 * 30);
+                c_pass.setMaxAge(3600 * 24 * 30);
+                c_pass.setMaxAge(3600 * 24 * 30);
                 response.addCookie(c_pass);
                 response.addCookie(c_user);
                 response.addCookie(c_detail);
             }
-            HttpSession session = request.getSession();
+            Cookie test = new Cookie("loginStatus", "success");
+            test.setMaxAge(3600 * 24 * 30);
+            response.addCookie(test);
             session.setAttribute("account", account);
-            response.sendRedirect("home");
-        }
-        else //login fail
+            request.setAttribute("loginStatus", "success");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else //login fail
         {
-            response.sendRedirect("index.jsp");
+            Cookie test = new Cookie("loginStatus", "fail");
+            test.setMaxAge(3600 * 24 * 30);
+            response.addCookie(test);
+            session.setAttribute("account", account);
+            request.setAttribute("loginStatus", "fail");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
