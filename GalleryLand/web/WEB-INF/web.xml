@@ -16,6 +16,10 @@
         <servlet-class>controller.GalleryControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>changeLike</servlet-name>
+        <servlet-class>controller.changeLike</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>controller.Home</servlet-class>
     </servlet>
@@ -30,6 +34,10 @@
     <servlet-mapping>
         <servlet-name>GalleryControl</servlet-name>
         <url-pattern>/gallery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeLike</servlet-name>
+        <url-pattern>/changeLike</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>

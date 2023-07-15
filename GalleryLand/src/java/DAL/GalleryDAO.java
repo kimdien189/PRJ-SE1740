@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Gallery;
 
 public class GalleryDAO extends BaseDAO {
@@ -14,6 +16,48 @@ public class GalleryDAO extends BaseDAO {
         String query = generateQuery(excludedIds);
         List<Gallery> images = executeQuery(query);
         return images;
+    }
+
+    public int getImageLike(String imageId) {
+        try {
+            String sql = "select likes from images where [id] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, imageId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int likes = rs.getInt("likes");
+                return likes;
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return -1;
+    }
+
+    public int incrementLikeCount(String imageId) {
+        int likes = getImageLike(imageId);
+        try {
+            String sql = "UPDATE images SET likes = likes + 1 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, imageId);
+            ResultSet rsAdd = statement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(GalleryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return likes;
+    }
+
+    public int decrementLikeCount(String imageId) {
+        int likes = getImageLike(imageId);
+        try {
+            String sql = "UPDATE images SET likes = likes - 1 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, imageId);
+            ResultSet rsAdd = statement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(GalleryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return likes;
     }
 
     private String generateQuery(List<String> excludedIds) {
@@ -55,6 +99,7 @@ public class GalleryDAO extends BaseDAO {
 
         return images;
     }
+
     /*
     public static void main(String[] args) {
         try {

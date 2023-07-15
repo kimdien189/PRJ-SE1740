@@ -292,8 +292,7 @@ p a:hover {
     bottom: 0;
     right: 0;
     margin: 0;
-    margin-top: -42px;
-    padding: 10px;
+    margin-top: -63px;
     color: white;
     font-size: 16px;
     text-align: end;
@@ -307,6 +306,7 @@ button {
   color: #65676b;
   padding: 5px 10px;
   border-radius: 15px;
+  margin-top: -5px
 }
 button.liked {
   color: #00a06b;

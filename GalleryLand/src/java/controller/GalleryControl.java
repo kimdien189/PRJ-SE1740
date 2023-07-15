@@ -17,7 +17,9 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +68,7 @@ public class GalleryControl extends HttpServlet {
             GalleryDAO galleryDAO = new GalleryDAO();
             List<String> ids = new ArrayList<>();
             StringJoiner joiner = new StringJoiner(",");
-
+            /*
             try {
                 List<Gallery> images = galleryDAO.getRandomImages(ids);
                 List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
@@ -90,6 +92,26 @@ public class GalleryControl extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
             }
+             */
+            @SuppressWarnings("unchecked")
+            Set<String> excludedIds = (Set<String>) session.getAttribute("excludedIds");
+            if (excludedIds == null) {
+                excludedIds = new HashSet<>();
+            }
+
+            try {
+                List<Gallery> images = galleryDAO.getRandomImages(new ArrayList<>(excludedIds));
+                for (Gallery image : images) {
+                    excludedIds.add(image.getID());
+                }
+                session.setAttribute("excludedIds", excludedIds);
+
+                // Set the images as a request attribute
+                request.setAttribute("images", images);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -107,6 +129,7 @@ public class GalleryControl extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

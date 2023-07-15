@@ -169,11 +169,12 @@
                     <div class="image-view">
                         <img src="${o.URL}" loading="lazy">
                         <p class="image_name">${o.name}</p>
-                        <button id="buttonid${o.id}" onclick="liked('${o.id}')">
-                            <i class="fa fa-thumbs-up"></i>
-                            <span class="icon">Like</span>
-                        </button>
-                        <p class="image_like">${o.likes} likes</p>
+                            <input type="hidden" name="imageId" value="${o.ID}">
+                            <button id="buttonid${o.ID}" onclick="liked('${o.ID}')">
+                                <i class="fa fa-thumbs-up"></i>
+                                <span class="icon">Like</span>
+                            </button>
+                         <p class="image_like" id="likes${o.ID}">${o.likes} likes</p>
                     </div>
                     <c:if test="${loop.index % 10 == 9 || loop.last}">
                     </div>
