@@ -26,8 +26,9 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -40,7 +41,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,9 +54,7 @@
                                 <li><a class="dropdown-item" href="#">More...</a></li>
                             </ul>
                         </li>
-
                     </ul>
-
                 </div>
 
                 <div class="input-group col-sm-2 col-md-8 searchBar">
@@ -72,91 +70,37 @@
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
+                        data-bs-target="#navbarSupportedContent,"
                         aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div id="login-buttons" class="collapse navbar-collapse login-user" id = "navbarSupportedContent">
+                <div id="login-buttons" class="login-user">
                     <% Account account = (Account) request.getAttribute("account"); %>
                     <% if (account != null) { %>
-                    <button type="button" class="btn btn-dark" >Welcome, <%= account.getDisplayname() %></button>
+                    <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+                        <li class="nav-item dropdown" id="usermenu">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Welcome <%= account.getDisplayname() %>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" id="">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Change info</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                     <% } %>
                     <% if (account == null) { %>
-                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalFormLogin">Login</button>
-                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalFormSignUp">Sign Up</button>
+                    <form action="login.jsp" method="get"><button type="submit" class="btn btn-dark" >Login</button></form>
+                    <form action="signup.jsp" method="get"><button type="submit" class="btn btn-dark" >Sign Up</button></form>
                     <% } %>
                 </div>
             </div>
         </nav>
-        <div class="modal fade" id="ModalFormLogin" tabindex="-1"
-             aria-labelledby="ModalFormLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button type="button" class="btn-close btn-close-white"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
-                        <div class="myform bg-dark">
-                            <h1 class="text-center">Gallery Land</h1>
-                            <form action="login" method="GET">
-                                <% String loginStatus = (String) request.getAttribute("loginStatus"); %>
-                                <% if (loginStatus == "fail") { %>
-                                <p class="text-danger">Wrong username or password</p>
-                                <% } %>
-                                <div class="mb-3 mt-4">
-                                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember" value="remember">
-                                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                                </div>
-                                <button type="submit" class="btn btn-light mt-3">LOGIN</button>
-                                <p>Not a member? <a href="#" data-bs-toggle="modal" data-bs-target="#ModalFormSignUp">Signup now</a></p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="ModalFormSignUp" tabindex="-1"
-             aria-labelledby="ModalFormLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button type="button" class="btn-close btn-close-white"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
-                        <div class="myform bg-dark">
-                            <h1 class="text-center">Gallery Land</h1>
-                            <form>
-                                <div class="mb-3 mt-4">
-                                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                                    <input type="email" class="form-control"
-                                           id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control"
-                                           id="exampleInputPassword1">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Confirm
-                                        Password</label>
-                                    <input type="password" class="form-control"
-                                           id="exampleInputPassword1">
-                                </div>
-                                <button type="submit" class="btn btn-light mt-3">Sign Up</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="fab-container">
             <div class="fab shadow">
                 <div class="fab-content">
@@ -224,6 +168,12 @@
                     </c:if>
                     <div class="image-view">
                         <img src="${o.URL}" loading="lazy">
+                        <p class="image_name">${o.name}</p>
+                        <button id="buttonid${o.id}" onclick="liked('${o.id}')">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="icon">Like</span>
+                        </button>
+                        <p class="image_like">${o.likes} likes</p>
                     </div>
                     <c:if test="${loop.index % 10 == 9 || loop.last}">
                     </div>

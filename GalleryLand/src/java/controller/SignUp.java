@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
@@ -9,7 +8,7 @@ import DAL.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,9 +17,9 @@ import model.Account;
 
 /**
  *
- * @author macbookair
+ * @author kimdi
  */
-public class LoginSession extends HttpServlet {
+public class SignUp extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +37,32 @@ public class LoginSession extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             String username = request.getParameter("username");
+            String displayname = request.getParameter("displayname");
             String password = request.getParameter("password");
-            AccountDAO db = new AccountDAO();
-            Account account = db.getAccountByUsernameAndPassword(username, password);
-            if (account != null) // login successful!
-            {
-                String remember = request.getParameter("remember");
-                if (remember != null) {
-                    Cookie c_user = new Cookie("username", username);
-                    Cookie c_pass = new Cookie("password", password);
-                    Cookie c_detail = new Cookie("detail", account.getDisplayname());
-                    c_user.setMaxAge(3600 * 24 * 30);
-                    c_pass.setMaxAge(3600 * 24 * 30);
-                    c_pass.setMaxAge(3600 * 24 * 30);
-                    response.addCookie(c_pass);
-                    response.addCookie(c_user);
-                    response.addCookie(c_detail);
+            String passwordConfirm = request.getParameter("passwordConfirm");
+            if (password.equals(passwordConfirm)) {
+                AccountDAO accountManager = new AccountDAO();
+                Account newUser = new Account(username, password, displayname);
+                String report = accountManager.signupToDatabase(newUser);
+                switch (report) {
+                    case "success":
+                        request.setAttribute("account", newUser);
+                        request.setAttribute("loginStatus", "success");
+                        request.getRequestDispatcher("home").forward(request, response);
+                        //response.sendRedirect("home");
+                        break;
+                    case "User already exist":
+                        request.setAttribute("report", report);
+                        request.getRequestDispatcher("signup.jsp").forward(request, response);
+                        break;
+                    case "Something went wrong":
+                        request.setAttribute("report", report);
+                        request.getRequestDispatcher("signup.jsp").forward(request, response);
+                        break;
                 }
-                /*
-            Cookie test = new Cookie("loginStatus", "success");
-            test.setMaxAge(3600 * 24 * 30);
-            response.addCookie(test);
-                 */
-                request.setAttribute("account", account);
-                request.setAttribute("loginStatus", "success");
-                request.getRequestDispatcher("home").forward(request, response);
-                //response.sendRedirect("home");
-            } else //login fail
-            {
-                /*
-            Cookie test = new Cookie("loginStatus", "fail");
-            test.setMaxAge(3600 * 24 * 30);
-            response.addCookie(test);
-                 */
-                request.setAttribute("account", account);
-                request.setAttribute("loginStatus", "fail");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                //response.sendRedirect("login.jsp");
+            } else {
+                request.setAttribute("report", "Confirm Password must be same as Password");
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
         }
     }

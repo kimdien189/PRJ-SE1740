@@ -29,36 +29,38 @@ public class Home extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String username = account != null ? account.getUsername() : null;
-        String password = account != null ? account.getPassword() : null;
-        if (account != null) {
-            Cookie[] cookies = request.getCookies();
-            String uname = null;
-            String pass = null;
-            for (Cookie cooky : cookies) {
-                if (cooky.getName().equals("username")) {
-                    uname = cooky.getValue();
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Account account = (Account) request.getAttribute("account");
+            String username = account != null ? account.getUsername() : null;
+            String password = account != null ? account.getPassword() : null;
+            if (account != null) {
+                Cookie[] cookies = request.getCookies();
+                String uname = null;
+                String pass = null;
+                for (Cookie cooky : cookies) {
+                    if (cooky.getName().equals("username")) {
+                        uname = cooky.getValue();
+                    }
+                    if (cooky.getName().equals("password")) {
+                        pass = cooky.getValue();
+                    }
+                    if (uname != null && pass != null) {
+                        break;
+                    }
                 }
-                if (cooky.getName().equals("password")) {
-                    pass = cooky.getValue();
+                if (uname != null && pass != null && uname.equals(username) && pass.equals(password)) {
+                    request.setAttribute("account", account);
                 }
-                if (uname != null && pass != null) {
-                    break;
-                }
+            } else {
+                request.setAttribute("account", account);
             }
-            if (uname != null && pass != null && uname.equals(username) && pass.equals(password)) {
-                session.setAttribute("account", account);
-            }
-        } else {
-            session.setAttribute("account", account);
+            request.getRequestDispatcher("gallery").forward(request, response);
+            //response.sendRedirect("gallery");
         }
-        request.getRequestDispatcher("gallery").forward(request, response);
-
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
@@ -70,6 +72,12 @@ public class Home extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -81,6 +89,7 @@ public class Home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -92,5 +101,4 @@ public class Home extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

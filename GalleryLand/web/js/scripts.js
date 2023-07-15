@@ -1,4 +1,9 @@
-
+function liked(imageId) {
+  // Get the button element by its ID
+  const likeButton = document.getElementById("buttonid" + imageId);
+  // Toggle the "active" class on the button
+  likeButton.classList.toggle("liked");
+}
 // Get the "To top" button element
 var toTopButton = document.getElementById('to-top-btn');
 

@@ -12,6 +12,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -56,37 +58,55 @@ public class GalleryControl extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            GalleryDAO galleryDAO = new GalleryDAO();
+            List<String> ids = new ArrayList<>();
+            StringJoiner joiner = new StringJoiner(",");
+
+            try {
+                List<Gallery> images = galleryDAO.getRandomImages(ids);
+                List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
+                for (String id : excludedIds) {
+                    if (!ids.contains(id)) {
+                        ids.add(id);
+                        joiner.add(id);
+                    }
+                }
+
+                String encodedValue = URLEncoder.encode(joiner.toString(), "UTF-8");
+                Cookie cookie = new Cookie(EXCLUDED_IDS_COOKIE_NAME, encodedValue);
+                cookie.setMaxAge(3600); // 1 hour
+                response.addCookie(cookie);
+                // Set the images as a request attribute
+                request.setAttribute("images", images);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                //response.sendRedirect("index.jsp");
+
+                // Forward the request to the index.jsp file
+            } catch (SQLException ex) {
+                Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        GalleryDAO galleryDAO = new GalleryDAO();
-        List<String> ids = new ArrayList<>();
-        StringJoiner joiner = new StringJoiner(",");
-
-        try {
-            List<Gallery> images = galleryDAO.getRandomImages(ids);
-            List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
-            for (String id : excludedIds) {
-                if (!ids.contains(id)) {
-                    ids.add(id);
-                    joiner.add(id);
-                }
-            }
-
-            String encodedValue = URLEncoder.encode(joiner.toString(), "UTF-8");
-            Cookie cookie = new Cookie(EXCLUDED_IDS_COOKIE_NAME, encodedValue);
-            cookie.setMaxAge(3600); // 1 hour
-            response.addCookie(cookie);
-            // Set the images as a request attribute
-            request.setAttribute("images", images);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            // Forward the request to the index.jsp file
-        } catch (SQLException ex) {
-            Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -98,6 +118,7 @@ public class GalleryControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /*
