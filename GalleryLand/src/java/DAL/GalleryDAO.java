@@ -12,8 +12,8 @@ public class GalleryDAO extends BaseDAO {
 
     private static final String EXCLUDED_IDS_COOKIE_NAME = "excludedIds";
 
-    public List<Gallery> getRandomImages(List<String> excludedIds) throws SQLException {
-        String query = generateQuery(excludedIds);
+    public List<Gallery> getRandomImages(List<String> excludedIds, int numOfImages) throws SQLException {
+        String query = generateQuery(excludedIds, numOfImages);
         List<Gallery> images = executeQuery(query);
         return images;
     }
@@ -60,11 +60,11 @@ public class GalleryDAO extends BaseDAO {
         return likes;
     }
 
-    private String generateQuery(List<String> excludedIds) {
+    private String generateQuery(List<String> excludedIds, int numOfImages) {
         StringJoiner joiner = new StringJoiner(",");
         excludedIds.forEach(id -> joiner.add("'" + id + "'"));
         String excludedIdsString = joiner.toString();
-        String query = "SELECT TOP 60 * FROM images";
+        String query = "SELECT TOP " + numOfImages + " * FROM images";
         if (!excludedIds.isEmpty()) {
             query += " WHERE id NOT IN (" + excludedIdsString + ")";
         }

@@ -42,7 +42,7 @@ public class LoginSession extends HttpServlet {
             AccountDAO db = new AccountDAO();
             Account account = db.getAccountByUsernameAndPassword(username, password);
             if (account != null) // login successful!
-            {
+            {//remembe me
                 String remember = request.getParameter("remember");
                 if (remember != null) {
                     Cookie c_user = new Cookie("username", username);
@@ -55,26 +55,14 @@ public class LoginSession extends HttpServlet {
                     response.addCookie(c_user);
                     response.addCookie(c_detail);
                 }
-                /*
-            Cookie test = new Cookie("loginStatus", "success");
-            test.setMaxAge(3600 * 24 * 30);
-            response.addCookie(test);
-                 */
                 request.setAttribute("account", account);
                 request.setAttribute("loginStatus", "success");
                 request.getRequestDispatcher("home").forward(request, response);
-                //response.sendRedirect("home");
             } else //login fail
             {
-                /*
-            Cookie test = new Cookie("loginStatus", "fail");
-            test.setMaxAge(3600 * 24 * 30);
-            response.addCookie(test);
-                 */
                 request.setAttribute("account", account);
                 request.setAttribute("loginStatus", "fail");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-                //response.sendRedirect("login.jsp");
             }
         }
     }

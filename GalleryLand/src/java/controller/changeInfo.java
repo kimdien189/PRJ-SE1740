@@ -19,7 +19,7 @@ import model.Account;
  *
  * @author kimdi
  */
-public class SignUp extends HttpServlet {
+public class changeInfo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,6 +36,7 @@ public class SignUp extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
+            Account oldUser = (Account) session.getAttribute("account");
             String username = request.getParameter("username");
             String displayname = request.getParameter("displayname");
             String password = request.getParameter("password");
@@ -43,21 +44,20 @@ public class SignUp extends HttpServlet {
             if (password.equals(passwordConfirm)) {
                 AccountDAO accountManager = new AccountDAO();
                 Account newUser = new Account(username, password, displayname);
-                String report = accountManager.signupToDatabase(newUser);
+                String report = accountManager.changeInfoDatabase(oldUser, newUser);
                 switch (report) {
-                    case "success"://login too
-                        Account account = accountManager.getAccountByUsernameAndPassword(username, password);
-                        request.setAttribute("account", account);
+                    case "success":
+                        request.setAttribute("account", newUser);
                         request.setAttribute("loginStatus", "success");
                         request.getRequestDispatcher("home").forward(request, response);
                         break;
                     case "User already exist":
                         request.setAttribute("report", report);
-                        request.getRequestDispatcher("signup.jsp").forward(request, response);
+                        request.getRequestDispatcher("changeInfo.jsp").forward(request, response);
                         break;
                     case "Something went wrong":
                         request.setAttribute("report", report);
-                        request.getRequestDispatcher("signup.jsp").forward(request, response);
+                        request.getRequestDispatcher("changeInfo.jsp").forward(request, response);
                         break;
                 }
             } else {

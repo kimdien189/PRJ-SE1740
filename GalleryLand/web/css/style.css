@@ -73,6 +73,9 @@ h2 {
     border-bottom: 2px solid #e6e6ea;
     box-shadow: 0 10px 10px -10px #3a5588;
     font-weight: 900;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
 }
 .navbar-brand:hover {
     color: #e6e6ea;
@@ -222,7 +225,7 @@ p a:hover {
 .interests {
     display: flex;
     padding: 20px;
-    margin-top: 15px;
+    padding-top:85px;
     align-items: stretch;
     gap: 20px;
     flex-wrap: wrap;

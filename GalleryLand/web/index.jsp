@@ -87,9 +87,9 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" id="">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Change info</a></li>
+                                <li><a class="dropdown-item" href="changeInfoCheck.jsp">Change info</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                <li><a class="dropdown-item" href="logout">Log out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -161,25 +161,18 @@
             </div>
         </div>
         <ul class="gallery-view">
-
-            <c:forEach items="${images}" var="o" varStatus="loop">
-                <c:if test="${loop.index % 10 == 0}">
-                    <div class="collum-view">
-                    </c:if>
-                    <div class="image-view">
-                        <img src="${o.URL}" loading="lazy">
-                        <p class="image_name">${o.name}</p>
-                            <input type="hidden" name="imageId" value="${o.ID}">
-                            <button id="buttonid${o.ID}" onclick="liked('${o.ID}')">
-                                <i class="fa fa-thumbs-up"></i>
-                                <span class="icon">Like</span>
-                            </button>
-                         <p class="image_like" id="likes${o.ID}">${o.likes} likes</p>
-                    </div>
-                    <c:if test="${loop.index % 10 == 9 || loop.last}">
-                    </div>
-                </c:if>
-            </c:forEach>
+            <div class="collum-view" id="col1">
+            </div>
+            <div class="collum-view" id="col2">
+            </div>
+            <div class="collum-view" id="col3">
+            </div>
+            <div class="collum-view" id="col4">
+            </div>
+            <div class="collum-view" id="col5">
+            </div>
+            <div class="collum-view" id="col6">
+            </div>
         </ul>
         <script src="js/scripts.js"></script>
 

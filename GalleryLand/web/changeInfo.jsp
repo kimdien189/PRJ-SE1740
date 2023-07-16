@@ -17,7 +17,6 @@
     </head>
     <body>
         <!-- partial:index.partial.html -->
-        <% String loginStatus = (String) request.getAttribute("loginStatus"); %>
         <div class="box-form">
             <div class="left">
                 <div class="overlay">
@@ -26,8 +25,10 @@
                 </div>
             </div>
             <div class="right">
-                <form action="signup" method ="post">
+                <form action="changeInfo" method ="post">
                     <h5>Change Info</h5>
+                    <p>Verification successful, you can now change your info</p>
+                    <br>
                     <div class="inputs">
                         <p class="text-danger">${report}</p>
                         <input type="text" name="username" placeholder="Username">

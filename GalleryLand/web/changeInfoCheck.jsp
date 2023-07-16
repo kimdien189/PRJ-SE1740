@@ -17,7 +17,7 @@
     </head>
     <body>
         <!-- partial:index.partial.html -->
-        <% String loginStatus = (String) request.getAttribute("loginStatus"); %>
+        <% String changeStatus = (String) request.getAttribute("changeStatus"); %>
         <div class="box-form">
             <div class="left">
                 <div class="overlay">
@@ -26,20 +26,22 @@
                 </div>
             </div>
             <div class="right">
-                <form action="signup" method ="post">
+                <form action="changeInfoCheck" method ="post">
                     <h5>Change Info</h5>
                     <div class="inputs">
-                        <p class="text-danger">${report}</p>
-                        <input type="text" name="username" placeholder="Username">
+                        <p>Please confirm old username and password</p>
                         <br>
-                        <input type="text" name="displayname" placeholder="Nickname">
+                        <% if (changeStatus != null) { %>
+                        <% if (changeStatus.equals("fail")) { %>
+                        <p class="text-danger">Wrong username or password</p>
+                        <% } %>
+                        <% } %>
+                        <input type="text" name="usernameOld" placeholder="Username">
                         <br>
-                        <input type="password" name="password" placeholder="Password">
-                        <br>
-                        <input type="password" name="passwordConfirm" placeholder="Confirm Password">
+                        <input type="password" name="passwordOld" placeholder="Password">
                     </div>
-                    <br>
-                    <button type= "submit" class="btn btn-dark">Change</button>
+                    <p>Need a fresh restart ?<a href="signup.jsp">Sign up now</a></p>
+                    <button type= "submit" class="btn btn-dark">Verify</button>
                 </form>
             </div>
 

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAL.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -56,10 +57,22 @@ public class Home extends HttpServlet {
                     request.setAttribute("account", account);
                 }
             } else {
-                request.setAttribute("account", account);
+                Cookie[] cookies = request.getCookies();
+                AccountDAO db = new AccountDAO();
+                String uname = null;
+                String pass = null;
+                for (Cookie cooky : cookies) {
+                    if (cooky.getName().equals("username")) {
+                        uname = cooky.getValue();
+                    }
+                    if (cooky.getName().equals("password")) {
+                        pass = cooky.getValue();
+                    }
+                }
+                Account accountCookies = db.getAccountByUsernameAndPassword(uname, pass);
+                request.setAttribute("account", accountCookies);
             }
-            request.getRequestDispatcher("gallery").forward(request, response);
-            //response.sendRedirect("gallery");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

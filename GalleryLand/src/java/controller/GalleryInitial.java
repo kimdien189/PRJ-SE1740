@@ -30,7 +30,7 @@ import model.Gallery;
  *
  * @author macbookair
  */
-public class GalleryControl extends HttpServlet {
+public class GalleryInitial extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -67,28 +67,53 @@ public class GalleryControl extends HttpServlet {
             HttpSession session = request.getSession();
             GalleryDAO galleryDAO = new GalleryDAO();
             List<String> ids = new ArrayList<>();
-            String col = request.getParameter("columnId");
+            StringJoiner joiner = new StringJoiner(",");
+            /*
+            try {
+                List<Gallery> images = galleryDAO.getRandomImages(ids);
+                List<String> excludedIds = images.stream().map(galleryImg -> galleryImg.getID()).collect(Collectors.toList());
+                for (String id : excludedIds) {
+                    if (!ids.contains(id)) {
+                        ids.add(id);
+                        joiner.add(id);
+                    }
+                }
+
+                String encodedValue = URLEncoder.encode(joiner.toString(), "UTF-8");
+                Cookie cookie = new Cookie(EXCLUDED_IDS_COOKIE_NAME, encodedValue);
+                cookie.setMaxAge(3600); // 1 hour
+                response.addCookie(cookie);
+                // Set the images as a request attribute
+                request.setAttribute("images", images);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                //response.sendRedirect("index.jsp");
+
+                // Forward the request to the index.jsp file
+            } catch (SQLException ex) {
+                Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             */
             @SuppressWarnings("unchecked")
             Set<String> excludedIds = (Set<String>) session.getAttribute("excludedIds");
-            ArrayList<Object> result = new ArrayList<>();
             if (excludedIds == null) {
                 excludedIds = new HashSet<>();
             }
+
             try {
-                List<Gallery> images = galleryDAO.getRandomImages(new ArrayList<>(excludedIds), 1);
-                for (Gallery image : images) {
+                List<Gallery> imagescol1 = galleryDAO.getRandomImages(new ArrayList<>(excludedIds), 10);
+                for (Gallery image : imagescol1) {
                     excludedIds.add(image.getID());
-                    result.add(image.getID());
-                    result.add(image.getURL());
-                    result.add(image.getname());
-                    result.add(image.getCreator());
-                    result.add(image.getDateCreated());
-                    result.add(image.getLikes());
-                    result.add(image.getTags());
                 }
-                request.setAttribute("excludedIds", excludedIds);
-                out.print(result);
-                out.flush();
+                request.setAttribute("imagescol1", imagescol1);
+                List<Gallery> imagescol2 = galleryDAO.getRandomImages(new ArrayList<>(excludedIds), 10);
+                for (Gallery image : imagescol2) {
+                    excludedIds.add(image.getID());
+                }
+                Cookie test = new Cookie("beginimage", "success");
+                test.setMaxAge(36);
+                response.addCookie(test);
+                request.setAttribute("imagescol2", imagescol2);
+                session.setAttribute("excludedIds", excludedIds);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);

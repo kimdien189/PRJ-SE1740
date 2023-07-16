@@ -7,9 +7,17 @@
         <servlet-name>LoginSession</servlet-name>
         <servlet-class>controller.LoginSession</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>SignUp</servlet-name>
         <servlet-class>controller.SignUp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changeInfoCheck</servlet-name>
+        <servlet-class>controller.changeInfoCheck</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changeInfo</servlet-name>
+        <servlet-class>controller.changeInfo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GalleryControl</servlet-name>
@@ -23,6 +31,14 @@
         <servlet-name>Home</servlet-name>
         <servlet-class>controller.Home</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GalleryInitial</servlet-name>
+        <servlet-class>controller.GalleryInitial</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controller.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSession</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -30,6 +46,14 @@
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeInfoCheck</servlet-name>
+        <url-pattern>/changeInfoCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeInfo</servlet-name>
+        <url-pattern>/changeInfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GalleryControl</servlet-name>
@@ -42,6 +66,14 @@
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GalleryInitial</servlet-name>
+        <url-pattern>/galleryInitial</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
