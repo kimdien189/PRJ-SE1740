@@ -57,7 +57,17 @@ function fetchMoreImages(columnId) {
             likeCount.id = "likes" + result[0].substring(1);
             likeCount.textContent = result[5].substring(1) + " likes";
             imageDiv.appendChild(likeCount);
-
+            // Add event listener to the imageDiv element
+            image.addEventListener('click', function () {
+                window.location.href = "imageVisitControl?image_ID=" + result[0].substring(1);
+            });
+            // Add hover effect to the imageDiv element
+            image.addEventListener('mouseover', function () {
+                image.style.boxShadow = "0px 0px 10px #ccc";
+            });
+            image.addEventListener('mouseout', function () {
+                image.style.boxShadow = "none";
+            });
             columnView.appendChild(imageDiv);
         }
     }

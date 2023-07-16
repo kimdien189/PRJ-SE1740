@@ -5,12 +5,14 @@
  */
 package DAL;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Gallery;
 
 /**
  *
@@ -41,6 +43,27 @@ public class AccountDAO extends BaseDAO {
         }
         return null;
 
+    }
+
+    public Account getAccountInfoByID(int user_ID) {
+        String sql = "select * from UserTBL where id = ?";
+        Account user = new Account();
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, String.valueOf(user_ID));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int user_id = resultSet.getInt("id");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String displayname = resultSet.getString("displayname");
+                user = new Account(user_id, username, password, displayname);
+            }
+        } catch (SQLException ex) {
+            System.err.println("An error occurred while executing the query: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return user;
     }
 
     public String signupToDatabase(Account newUser) {

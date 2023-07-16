@@ -15,7 +15,7 @@ public class Gallery {
     private String ID;
     private String URL;
     private String name;
-    private String creator;
+    private int creator;
     private Date dateCreated;
     private int likes;
     //1 isColorful;
@@ -35,7 +35,10 @@ public class Gallery {
     //15 isAbstract;
     private boolean[] tags = new boolean[15];
 
-    public Gallery(String ID, String URL, String name, String creator, Date dateCreated, int likes, boolean[] tags) {
+    public Gallery() {
+    }
+
+    public Gallery(String ID, String URL, String name, int creator, Date dateCreated, int likes, boolean[] tags) {
         this.ID = ID;
         this.URL = URL;
         this.name = name;
@@ -73,11 +76,11 @@ public class Gallery {
         this.URL = URL;
     }
 
-    public String getCreator() {
+    public int getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(int creator) {
         this.creator = creator;
     }
 

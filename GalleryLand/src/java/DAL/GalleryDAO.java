@@ -18,6 +18,35 @@ public class GalleryDAO extends BaseDAO {
         return images;
     }
 
+    public Gallery getImageByID(int image_ID) {
+        String sql = "select * from Images where id = ?";
+        Gallery image = new Gallery();
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, String.valueOf(image_ID));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String url = resultSet.getString("url");
+                String name = resultSet.getString("name");
+                int creator = resultSet.getInt("creatorID");
+                Date dateCreated = resultSet.getDate("dateCreated");
+                int likes = resultSet.getInt("likes");
+                String tagsString = resultSet.getString("tags");
+                boolean[] tagsBooleanArray = new boolean[tagsString.length()];
+                for (int i = 0; i < tagsString.length(); i++) {
+                    tagsBooleanArray[i] = (tagsString.charAt(i) == '1');
+                }
+                image = new Gallery(id, url, name, creator, dateCreated, likes, tagsBooleanArray);
+            }
+        } catch (SQLException ex) {
+            System.err.println("An error occurred while executing the query: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return image;
+    }
+
     public int getImageLike(String imageId) {
         try {
             String sql = "select likes from images where [id] = ?";
@@ -81,7 +110,7 @@ public class GalleryDAO extends BaseDAO {
                 String id = resultSet.getString("id");
                 String url = resultSet.getString("url");
                 String name = resultSet.getString("name");
-                String creator = resultSet.getString("creator");
+                int creator = resultSet.getInt("creatorID");
                 Date dateCreated = resultSet.getDate("dateCreated");
                 int likes = resultSet.getInt("likes");
                 String tagsString = resultSet.getString("tags");
@@ -99,22 +128,4 @@ public class GalleryDAO extends BaseDAO {
 
         return images;
     }
-
-    /*
-    public static void main(String[] args) {
-        try {
-            GalleryDAO galleryDAO = new GalleryDAO();
-            List<String> excludedIds = new ArrayList<>();
-            excludedIds.add("1");
-            excludedIds.add("2");
-            List<Gallery> images = galleryDAO.getRandomImages(excludedIds);
-            for (Gallery image : images) {
-                System.out.println(image.getURL());
-            }
-        } catch (SQLException ex) {
-            System.err.println("An error occurred while retrieving images: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-    }
-     */
 }

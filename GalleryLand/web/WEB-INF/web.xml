@@ -24,6 +24,10 @@
         <servlet-class>controller.GalleryControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>imageVisitControl</servlet-name>
+        <servlet-class>controller.imageVisitControl</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>changeLike</servlet-name>
         <servlet-class>controller.changeLike</servlet-class>
     </servlet>
@@ -58,6 +62,10 @@
     <servlet-mapping>
         <servlet-name>GalleryControl</servlet-name>
         <url-pattern>/gallery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>imageVisitControl</servlet-name>
+        <url-pattern>/imageVisitControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>changeLike</servlet-name>

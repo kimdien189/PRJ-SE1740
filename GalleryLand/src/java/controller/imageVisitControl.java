@@ -5,7 +5,9 @@
  */
 package controller;
 
+import DAL.AccountDAO;
 import DAL.GalleryDAO;
+import DAL.CommentDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -22,12 +24,14 @@ import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Gallery;
+import model.Comment;
+import model.Account;
 
 /**
  *
  * @author macbookair
  */
-public class GalleryControl extends HttpServlet {
+public class imageVisitControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +42,6 @@ public class GalleryControl extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String EXCLUDED_IDS_COOKIE_NAME = "excludedIds";
-
-    private String joinExcludedIds(List<String> ids) {
-        StringJoiner joiner = new StringJoiner(",");
-        for (String id : ids) {
-            joiner.add(id.toString());
-        }
-        return joiner.toString();
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -63,33 +57,21 @@ public class GalleryControl extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             GalleryDAO galleryDAO = new GalleryDAO();
-            List<String> ids = new ArrayList<>();
-            String col = request.getParameter("columnId");
-            @SuppressWarnings("unchecked")
-            Set<String> excludedIds = (Set<String>) session.getAttribute("excludedIds");
-            ArrayList<Object> result = new ArrayList<>();
-            if (excludedIds == null) {
-                excludedIds = new HashSet<>();
+            AccountDAO accountDAO = new AccountDAO();
+            CommentDAO commentDAO = new CommentDAO();
+            int image_ID = Integer.parseInt(request.getParameter("image_ID"));
+            Gallery image = galleryDAO.getImageByID(image_ID);
+            List<Comment> comments = commentDAO.getCommentsByID(image_ID);
+            List<Account> accounts = new ArrayList<>();
+            for (Comment comment : comments) {
+                int User_id = comment.getUser_id();
+                Account account = accountDAO.getAccountInfoByID(User_id);
+                accounts.add(account);
             }
-            try {
-                List<Gallery> images = galleryDAO.getRandomImages(new ArrayList<>(excludedIds), 1);
-                for (Gallery image : images) {
-                    excludedIds.add(image.getID());
-                    result.add(image.getID());
-                    result.add(image.getURL());
-                    result.add(image.getname());
-                    result.add(image.getCreator());
-                    result.add(image.getDateCreated());
-                    result.add(image.getLikes());
-                    result.add(image.getTags());
-                }
-                request.setAttribute("excludedIds", excludedIds);
-                out.print(result);
-                out.flush();
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(GalleryControl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            session.setAttribute("image", image);
+            session.setAttribute("comments", comments);
+            session.setAttribute("accounts", accounts);
+            request.getRequestDispatcher("imageVisit.jsp").forward(request, response);
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
