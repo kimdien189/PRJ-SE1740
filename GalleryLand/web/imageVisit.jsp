@@ -50,7 +50,13 @@
                                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
                                              height="60" />
                                         <div>
-                                            <h6 class="fw-bold mb-1">${accounts[comment.user_id - 1].username}</h6>
+                                            <c:set var="username" value="" />
+                                            <c:forEach var="account" items="${accounts}">
+                                                <c:if test="${account.user_id == comment.user_id}">
+                                                    <c:set var="username" value="${account.displayname}" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <p>${username}</p>
                                             <div class="d-flex align-items-center mb-3">
                                                 <p class="mb-0">
                                                     ${comment.comment_date}

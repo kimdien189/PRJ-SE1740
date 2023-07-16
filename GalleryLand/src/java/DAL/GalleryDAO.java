@@ -47,6 +47,36 @@ public class GalleryDAO extends BaseDAO {
         return image;
     }
 
+    public List<Gallery> searchImagesByName(String searchQuery) throws SQLException {
+        List<Gallery> images = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM images WHERE name LIKE ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, "%" + searchQuery + "%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String url = resultSet.getString("url");
+                String name = resultSet.getString("name");
+                int creator = resultSet.getInt("creatorID");
+                Date dateCreated = resultSet.getDate("dateCreated");
+                int likes = resultSet.getInt("likes");
+                String tagsString = resultSet.getString("tags");
+                boolean[] tagsBooleanArray = new boolean[tagsString.length()];
+                for (int i = 0; i < tagsString.length(); i++) {
+                    tagsBooleanArray[i] = (tagsString.charAt(i) == '1');
+                }
+                Gallery image = new Gallery(id, url, name, creator, dateCreated, likes, tagsBooleanArray);
+                images.add(image);
+            }
+        } catch (SQLException ex) {
+            System.err.println("An error occurred while executing the query: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return images;
+    }
+
     public int getImageLike(String imageId) {
         try {
             String sql = "select likes from images where [id] = ?";

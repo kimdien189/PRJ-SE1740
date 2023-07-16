@@ -24,6 +24,10 @@
         <servlet-class>controller.GalleryControl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>controller.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>imageVisitControl</servlet-name>
         <servlet-class>controller.imageVisitControl</servlet-class>
     </servlet>
@@ -62,6 +66,10 @@
     <servlet-mapping>
         <servlet-name>GalleryControl</servlet-name>
         <url-pattern>/gallery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>imageVisitControl</servlet-name>

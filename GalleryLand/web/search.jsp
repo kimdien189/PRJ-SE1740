@@ -173,20 +173,32 @@
             </div>
         </div>
         <ul class="gallery-view">
-            <div class="collum-view" id="col1">
-            </div>
-            <div class="collum-view" id="col2">
-            </div>
-            <div class="collum-view" id="col3">
-            </div>
-            <div class="collum-view" id="col4">
-            </div>
-            <div class="collum-view" id="col5">
-            </div>
-            <div class="collum-view" id="col6">
-            </div>
+            <c:set var="imagesPerColumn" value="6" />
+            <c:set var="columnCount" value="0" />
+            <c:forEach items="${images}" var="o" varStatus="loop">
+                <c:if test="${loop.index % imagesPerColumn == 0}">
+                    <c:set var="columnCount" value="${columnCount + 1}" />
+                    <div class="collum-view" id="col${columnCount}">
+                    </c:if>
+                    <div class="image-view">
+                        <img src="${o.URL}" loading="lazy"
+                             onclick="onImageClick('${o.ID}')"
+                             onmouseover="onImageHover(this, true)"
+                             onmouseout="onImageHover(this, false)">
+                        <p class="image_name">${o.name}</p>
+                        <input type="hidden" name="imageId" value="${o.ID}">
+                        <button id="buttonid${o.ID}" onclick="liked('${o.ID}')">
+                            <i class="fa fa-thumbs-up"></i>
+                            <span class="icon">Like</span>
+                        </button>
+                        <p class="image_like" id="likes${o.ID}">${o.likes} likes</p>
+                    </div>
+                    <c:if test="${loop.index % imagesPerColumn == imagesPerColumn - 1 || loop.last}">
+                    </div>
+                </c:if>
+            </c:forEach>
         </ul>
-        <script src="js/scripts.js"></script>
+        <script src="js/scriptsSearch.js"></script>
 
         <footer>
             <p>&copy; 2023 My Webpage</p>

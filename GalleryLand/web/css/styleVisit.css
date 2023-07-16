@@ -52,6 +52,7 @@ h1 {
     font-size: 1.92em;
     font-weight: 600;
     letter-spacing: -0.055em;
+    color: aliceblue;
 }
 h2 {
     display: block;
@@ -60,6 +61,7 @@ h2 {
     font-weight: 400;
     font-size: 1.25em;
     letter-spacing: -0.015em;
+    color: aliceblue;
 }
 
 .label {
