@@ -27,7 +27,7 @@
     <body>
         <div class="image-view">
             <div class="col-md-6 h-100 left">
-                <img src="${image.URL}" loading="lazy">
+                <img class="img-fluid" src="${image.URL}" loading="lazy">
             </div>
             <div class="col-md-6 h-100 right">
                 <div class="image_name" >
