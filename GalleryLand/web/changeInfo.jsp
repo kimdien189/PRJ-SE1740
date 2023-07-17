@@ -26,7 +26,8 @@
             </div>
             <div class="right">
                 <form action="changeInfo" method ="post">
-                    <h5>Change Info</h5>
+                    <h5>Change</h5>
+                    <h5>Info</h5>
                     <p>Verification successful, you can now change your info</p>
                     <br>
                     <div class="inputs">

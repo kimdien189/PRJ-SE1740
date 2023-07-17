@@ -27,7 +27,8 @@
             </div>
             <div class="right">
                 <form action="changeInfoCheck" method ="post">
-                    <h5>Change Info</h5>
+                    <h5>Change</h5>
+                    <h5>Info</h5>
                     <div class="inputs">
                         <p>Please confirm old username and password</p>
                         <br>

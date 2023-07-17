@@ -56,7 +56,7 @@
                                                     <c:set var="username" value="${account.displayname}" />
                                                 </c:if>
                                             </c:forEach>
-                                            <p>${username}</p>
+                                            <p class="usernameShow">${username}</p>
                                             <div class="d-flex align-items-center mb-3">
                                                 <p class="mb-0">
                                                     ${comment.comment_date}
@@ -88,6 +88,6 @@
             <button type="submit">Submit</button>
         </form>
         --%>
-        <script src="js/scripts.js"></script>
+        <script src="js/scriptsSearch.js"></script>
     </body>
 </html>

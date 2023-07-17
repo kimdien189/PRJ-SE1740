@@ -47,11 +47,11 @@
                                 Explore
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">For you</a></li>
-                                <li><a class="dropdown-item" href="#">Popular</a></li>
-                                <li><a class="dropdown-item" href="#">New</a></li>
+                                <li><a class="dropdown-item" href="home">For you</a></li>
+                                <li><a class="dropdown-item" href="home">Popular</a></li>
+                                <li><a class="dropdown-item" href="home">New</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">More...</a></li>
+                                <li><a class="dropdown-item" href="home">More...</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -90,7 +90,7 @@ window.addEventListener('scroll', function () {
     var clientHeight = document.documentElement.clientHeight;
     console.log("scrolling");
     console.log("scrollTop:", scrollTop, "clientHeight:", clientHeight, "scrollHeight:", scrollHeight);
-    if ((scrollTop + clientHeight > scrollHeight - 1000)) {
+    if ((scrollTop + clientHeight > scrollHeight*0.8)) {
         console.log("bottom");
         fetchMoreImages("col1");
         fetchMoreImages("col2");

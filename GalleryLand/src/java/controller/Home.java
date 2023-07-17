@@ -49,9 +49,6 @@ public class Home extends HttpServlet {
                     if (cooky.getName().equals("password")) {
                         pass = cooky.getValue();
                     }
-                    if (uname != null && pass != null) {
-                        break;
-                    }
                 }
                 if (uname != null && pass != null && uname.equals(username) && pass.equals(password)) {
                     request.setAttribute("account", account);
@@ -69,8 +66,11 @@ public class Home extends HttpServlet {
                         pass = cooky.getValue();
                     }
                 }
-                Account accountCookies = db.getAccountByUsernameAndPassword(uname, pass);
-                request.setAttribute("account", accountCookies);
+                if (uname != null && pass != null) {
+                    Account accountCookies = db.getAccountByUsernameAndPassword(uname, pass);
+                    request.setAttribute("account", accountCookies);
+                }
+
             }
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }

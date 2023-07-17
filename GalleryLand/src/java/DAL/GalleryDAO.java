@@ -2,6 +2,7 @@ package DAL;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.logging.Level;
@@ -157,5 +158,41 @@ public class GalleryDAO extends BaseDAO {
         }
 
         return images;
+    }
+
+    public static void main(String[] args) {
+        // create a new instance of GalleryDAO
+        GalleryDAO galleryDAO = new GalleryDAO();
+
+        // create a list of excluded image ids
+        List<String> excludedIds = new ArrayList<>();
+        excludedIds.add("123");
+        excludedIds.add("456");
+
+        // get a list of 5 random images, excluding the excludedIds
+        int numOfImages = 5;
+        List<Gallery> images;
+        try {
+            images = galleryDAO.getRandomImages(excludedIds, numOfImages);
+            // do something with the images, e.g. display them on a webpage
+            for (Gallery image : images) {
+                // get the boolean array of tags
+                boolean[] tags = image.getTags();
+                int numTags = tags.length;
+                System.out.println("Number of tags: " + numTags);
+
+                // convert the boolean array to a human-readable string
+                String tagsString = Arrays.toString(tags);
+
+                // print the image information, including the tags string
+                System.out.println("ID=" + image.getID() + ", URL=" + image.getURL() + ", name=" + image.getname()
+                        + ", creator=" + image.getCreator() + ", dateCreated=" + image.getDateCreated() + ", likes="
+                        + image.getLikes() + ", tags=" + tagsString);
+            }
+        } catch (SQLException e) {
+            // handle the SQL exception
+            e.printStackTrace();
+        }
+        // close the connection to the database
     }
 }
